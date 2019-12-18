@@ -1,0 +1,18 @@
+version: 0.1 ({build})
+skip_branch_with_pr: true
+
+image:
+- Visual Studio 2017
+
+platform:
+- x64
+
+configuration:
+- Release
+
+clone_folder: C:\dev\Hazel
+
+build:
+  project: C:\dev\Hazel
+  parallel: true
+  verbosity: normal
