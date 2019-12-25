@@ -12,6 +12,10 @@ configuration:
 
 clone_folder: C:\dev\Hazel
 
+before_build:
+  - cd C:\Hazel
+  - GenerateProjects.bat && cd C:\Hazel
+
 build:
   project: C:\dev\Hazel
   parallel: true
