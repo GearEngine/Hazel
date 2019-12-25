@@ -10,13 +10,13 @@ platform:
 configuration:
 - Release
 
-clone_folder: C:\dev\Hazel
+clone_folder: C:\Hazel
 
 before_build:
   - cd C:\Hazel
   - GenerateProjects.bat && cd C:\Hazel
 
 build:
-  project: C:\dev\Hazel
+  project: C:\Hazel\Hazel.sln
   parallel: true
   verbosity: normal
