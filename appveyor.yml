@@ -14,9 +14,9 @@ clone_folder: C:\Hazel
 
 before_build:
   - cd C:\Hazel
-  - GenerateProjects.bat && cd C:\Hazel
   - git submodule update --init --recursive
-
+  - GenerateProjects.bat && cd C:\Hazel
+  
 build:
   project: C:\Hazel\Hazel.sln
   parallel: true
