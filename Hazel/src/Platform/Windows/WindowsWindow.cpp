@@ -6,12 +6,12 @@
 #include "Hazel/Events/KeyEvent.h"
 
 namespace Hazel {
-
-	static bool s_GLFWInitailized = false;
+	
+	static bool s_GLFWInitialized = false;
 
 	static void GLFWErrorCallback(int error, const char* description)
 	{
-		HZ_CORE_ERROR("GLFW Error ({0}): {1}",error, description)
+		HZ_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
 	Window* Window::Create(const WindowProps& props)
@@ -29,7 +29,7 @@ namespace Hazel {
 		Shutdown();
 	}
 
-	void WindowsWindow::Init(const WindowProps & props)
+	void WindowsWindow::Init(const WindowProps& props)
 	{
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
@@ -37,12 +37,13 @@ namespace Hazel {
 
 		HZ_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-		if (!s_GLFWInitailized) {
-			//TODO : glfwTerminate on system shutdown
+		if (!s_GLFWInitialized)
+		{
+			// TODO: glfwTerminate on system shutdown
 			int success = glfwInit();
-			HZ_CORE_ASSERT(success, "Could not initialize GLFW!");
+			HZ_CORE_ASSERT(success, "Could not intialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
-			s_GLFWInitailized = true;
+			s_GLFWInitialized = true;
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
@@ -50,14 +51,14 @@ namespace Hazel {
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
-		//Set GLFW callback 
+		// Set GLFW callbacks
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			data.Width = width;
 			data.Height = height;
 
-			WindowResizeEvent  event(width, height);
+			WindowResizeEvent event(width, height);
 			data.EventCallback(event);
 		});
 
@@ -95,12 +96,12 @@ namespace Hazel {
 			}
 		});
 
-		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods) 
+		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
-				switch (action)
-				{
+			switch (action)
+			{
 				case GLFW_PRESS:
 				{
 					MouseButtonPressedEvent event(button);
@@ -116,7 +117,6 @@ namespace Hazel {
 			}
 		});
 
-
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -125,7 +125,7 @@ namespace Hazel {
 			data.EventCallback(event);
 		});
 
-		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos) 
+		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
