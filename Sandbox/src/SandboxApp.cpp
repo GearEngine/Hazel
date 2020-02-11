@@ -2,7 +2,6 @@
 
 #include "imgui/imgui.h"
 
-#include "example.h"
 
 class ExampleLayer : public Hazel::Layer
 {
@@ -45,7 +44,7 @@ class Sandbox : public Hazel::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new ExampleLayer2());
+		PushLayer(new ExampleLayer());
 	}
 
 	~Sandbox()
