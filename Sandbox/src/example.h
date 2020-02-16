@@ -148,6 +148,8 @@ public:
 		glVertex2f(-0.05f + pos.x, -0.05f + pos.y);
 		glVertex2f(0.05f + pos.x, -0.05f + pos.y);
 		glEnd();
+
+		glColor3f(0.f, 0.f, 1.f);
 	}
 
 	void OnUpdate() override
